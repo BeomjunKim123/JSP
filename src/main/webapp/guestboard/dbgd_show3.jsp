@@ -8,6 +8,17 @@
  <%@ include file = "../DB_Connection/db_conn_oracle.jsp" %>
  
  <%
+ 	//ResultSet rs 의 값을 저장하는 ArrayList 선언
+ 	//ArrayList는 컬렉션 : 동일한 자료형을 저장하고 무한정 늘어남
+ 	ArrayList name = new ArrayList();
+ 	ArrayList email = new ArrayList();
+ 	
+ %>
+ 
+ 
+ 
+ 
+ <%
  	// DB를 접속 해서 값을 읽어옴, Select 쿼리 (변수 값이 없이 DB에서 읽어오는 쿼리 )
  	
  	String sql = null; 
@@ -25,6 +36,8 @@
  	
  	//rs는 select 한 결과 레코드셋을 담고 있다. 
  	rs = pstmt.executeQuery();         //sql 쿼리가 Select 문인 경우 ==> stmt.executeQuery(sql), rs
+ 	
+ 	//rs의 각 필드의 값을 ArrayList에 저장
  	
  %>
       
@@ -61,9 +74,11 @@
 			<tr><th>이름</th> <th>메일주소</th><th>날짜</th><th>제목</th><th>내용</th></tr>	
 			
 			<%  if ( rs.next() ){
-				
+			
 				do {
-				
+			
+					//rs의 각 필드의 값을 ArrayList에 저장
+					name.add(rs.getString("name"));
 			%>
 			
 			<tr><td> <%= rs.getString(1) %> </td> <td> <%= rs.getString(2) %></td><td><%= rs.getString(3) %></td>
